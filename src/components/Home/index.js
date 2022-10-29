@@ -46,6 +46,10 @@ export const Home = (props) => {
     const searchText = e.target.value;
     setSearchedText(searchText)
   }
+  const searchBack = () => {
+    searchProducts(false)
+    setSearchedText('')
+  }
 
   useEffect(() => {
     const container = width > 990 ? document.getElementById('homeContainer') : document;
@@ -83,8 +87,8 @@ export const Home = (props) => {
         <ProductSearchWrapper>
           <FixedHeader>
             {currentLng === 'en'
-              ? <FiArrowLeft size="20" onClick={() => searchProducts(false)} />
-              : <FiArrowRight size="20" onClick={() => searchProducts(false)} />
+              ? <FiArrowLeft size="20" onClick={() => searchBack()} />
+              : <FiArrowRight size="20" onClick={() => searchBack()} />
             }
             <GobackTitle>{t('Product Search')}</GobackTitle>
           </FixedHeader>

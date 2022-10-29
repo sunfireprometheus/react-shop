@@ -47,8 +47,7 @@ export const Products = (props) => {
 
   useEffect(() => {
     const newArr = !isProductSearched ? products.filter(item => item.cat_id === catId) :
-      products.filter(item => item.name_en.toLowerCase().search(searchedText) > -1);
-    console.log(products, searchedText)
+      products.filter(item => (item.name_en.toLowerCase().search(searchedText) > -1) || (item.name_ar.toLowerCase().search(searchedText) > -1));
     setData(newArr);
   }, [catId, products, searchedText])
 
