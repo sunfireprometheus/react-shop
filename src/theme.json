@@ -1,0 +1,30 @@
+{
+  "fonts": {
+    "primary": {
+      "name": "Cairo",
+      "weights": [300, 400, 500, 600]
+    },
+    "special": {
+      "name": "Lobster",
+      "weights": [400]
+    }
+  },
+  "colors": {
+    "green": "#5586df",
+    "gray": "#e0e0e0",
+    "error": "red",
+    "black": "#404040",
+    "backgroundColor": "#ffffff",
+    "primaryButtCol": "#9c5a2e",
+    "primaryDisabledCol": "#9c5a2e4d",
+    "primaryLinkCol": "#5586df",
+    "primaryIconCol": "#9c5a2e",
+    "primarySpanCol": "#ff6921",
+    "hoverButtCol": "#f3690c",
+    "loadingCol": "#65d16a",
+    "loadingBackCol": "#00000024",
+    "progressBarActiveCol": "#9c5a2e",
+    "progressBarDeactiveCol": "#dbdbdb",
+    "closedProductCol": "#100e0e9c"
+  }
+}

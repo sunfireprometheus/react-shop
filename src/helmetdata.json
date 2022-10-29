@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Delivery System",
+    "description": "Delivery system",
+    "keywords": "food, delivery, ordering",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "home": {
+    "title": "Candy",
+    "description": "Food ordering system",
+    "keywords": "food, ordering",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "order": {
+    "title": "Review Cart",
+    "description": "Food ordering system",
+    "keywords": "cart, review",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "contact": {
+    "title": "Checkout Contact",
+    "description": "Food ordering system - checout",
+    "keywords": "contact, checkout",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "delivery": {
+    "title": "Delivery Address",
+    "description": "Food ordering system - Delivery Address",
+    "keywords": "address, checkout, Delivery",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "payment": {
+    "title": "Delivery Payment",
+    "description": "Food ordering system - Delivery Payment",
+    "keywords": "payment, checkout, Delivery",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "confirm": {
+    "title": "Ordering confirm",
+    "description": "Food ordering system - Ordering confirm",
+    "keywords": "confirm, checkout, Ordering",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "failure": {
+    "title": "Ordering confirm",
+    "description": "Food ordering system - Ordering confirm",
+    "keywords": "failure, checkout, Ordering",
+    "robots": "",
+    "canonicalUrl": ""
+  }
+}
