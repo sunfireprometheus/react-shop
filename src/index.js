@@ -50,7 +50,7 @@ i18n
   .use(HttpApi)
   .init({
     supportedLngs: ['en', 'ar'],
-    lng: "en",
+    lng: "ar",
     fallbackLng: "ar",
     detection: {
       order: ['localStorage', 'htmlTag'],
