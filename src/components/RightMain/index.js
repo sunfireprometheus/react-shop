@@ -9,7 +9,7 @@ import {
   RightWrapper
 } from './styles'
 
-export const RightMain = () => {
+export const RightMain = ({ searchIconShowed, searchProducts, isProductSearched }) => {
 
   const [configState] = useConfig()
   // const theme = useTheme();
@@ -17,7 +17,7 @@ export const RightMain = () => {
   return (
     <RightContainer bgimage={configState?.configs?.background_image} id="rightContainer">
       <RightWrapper>
-        <RightTop />
+        <RightTop search={searchProducts} searchIconShowed={searchIconShowed && !isProductSearched} />
         <RightCenter />
       </RightWrapper>
     </RightContainer>

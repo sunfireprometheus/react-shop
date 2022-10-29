@@ -4,14 +4,16 @@ import { BsSearch } from "react-icons/bs";
 import { useTheme } from '../../../contexts/ThemeContext'
 
 import {
-  RightTopContainer
+  RightTopContainer,
+  SearchIconWrapper
 } from './styles'
 
-export const RightTop = () => {
+export const RightTop = (props) => {
 
   const [theme, { update }] = useTheme()
   const { i18n } = useTranslation();
   const currentLng = localStorage.getItem('i18nextLng');
+  const { search, searchIconShowed } = props
 
   useEffect(() => {
     if (currentLng === 'ar') {
@@ -33,9 +35,11 @@ export const RightTop = () => {
 
   return (
     <RightTopContainer>
-      <div>
-        <BsSearch />
-      </div>
+      {searchIconShowed && (
+        <SearchIconWrapper>
+          <BsSearch size={20} onClick={() => search(true)} />
+        </SearchIconWrapper>
+      )}
       {currentLng === 'en'
         ? <span onClick={changeLanguage}>عربي</span>
         : <span onClick={changeLanguage}>English</span>

@@ -31,7 +31,7 @@ import {
 
 export const Products = (props) => {
 
-  const { catId, handleChangeCat } = props
+  const { catId, handleChangeCat, searchedText, isProductSearched } = props
   const { t } = useTranslation();
   const [theme] = useTheme()
   const currentLng = localStorage.getItem('i18nextLng');
@@ -46,9 +46,11 @@ export const Products = (props) => {
   const catName = cat ? (currentLng === 'en' ? cat.name_en : cat.name_ar) : '';
 
   useEffect(() => {
-    const newArr = products.filter(item => item.cat_id === catId);
+    const newArr = !isProductSearched ? products.filter(item => item.cat_id === catId) :
+      products.filter(item => item.name_en.toLowerCase().search(searchedText) > -1);
+    console.log(products, searchedText)
     setData(newArr);
-  }, [catId, products])
+  }, [catId, products, searchedText])
 
   const handleAddToCart = (prodId, price) => {
     addToCart(prodId, price);
@@ -68,13 +70,15 @@ export const Products = (props) => {
   return (
     data?.length > 0 &&
     <ProductContainer>
-      <FixedHeader>
-        {currentLng === 'en'
-          ? <FiArrowLeft size="20" onClick={() => handleChangeCat(null)} />
-          : <FiArrowRight size="20" onClick={() => handleChangeCat(null)} />
-        }
-        <GobackTitle>{catName}</GobackTitle>
-      </FixedHeader>
+      {!isProductSearched && (
+        <FixedHeader>
+          {currentLng === 'en'
+            ? <FiArrowLeft size="20" onClick={() => handleChangeCat(null)} />
+            : <FiArrowRight size="20" onClick={() => handleChangeCat(null)} />
+          }
+          <GobackTitle>{catName}</GobackTitle>
+        </FixedHeader>
+      )}
       <ProductMain>
         {data.map(item => {
           const matchedProd = cart.find(obj => obj.prodId === item.id);

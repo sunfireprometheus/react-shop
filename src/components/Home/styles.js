@@ -25,7 +25,9 @@ export const BetweenGray = styled.div`
 `
 
 export const AllProducts = styled.div`
-  position: absolute;
+  ${({ isNotProductSearched }) => isNotProductSearched && `
+    position: absolute;
+  `}
   top: 0;
   width: 100%;
   margin-bottom: 80px;
@@ -49,7 +51,13 @@ export const WhatsappContainer = styled.a`
     bottom: 65px;
   }
 `
-
+export const ProductSearchWrapper = styled.div`
+`
+export const OneEle = styled.div`
+    padding: 10px 15px;
+    border-bottom: 1px solid #e8e8e8;
+    background-color: ${({ theme }) => theme.colors.backgroundColor};
+`
 export const HomeContainer = (props) => {
   return (
     <HomeContainerStyled id={props.id}>

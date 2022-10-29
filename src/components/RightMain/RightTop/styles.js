@@ -7,7 +7,7 @@ export const RightTopContainerStyled = styled.div`
   color: ${({ theme }) => theme.colors.backgroundColor};
   padding: 25px 10%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
   & span{
@@ -28,6 +28,12 @@ export const RightTopContainerStyled = styled.div`
   }
 `
 
+export const SearchIconWrapper = styled.div`
+  ${props => props.theme.rtl ? 'margin-left: 10px' : 'margin-right: 10px'};
+  & > svg {
+    cursor: pointer;
+  }
+`
 export const RightTopContainer = (props) => {
   return (
     <RightTopContainerStyled>

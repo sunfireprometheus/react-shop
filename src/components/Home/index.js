@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from "react-i18next";
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useCategory } from '../../contexts/CategoryContext'
 import { AiOutlineWhatsApp } from 'react-icons/ai'
@@ -8,23 +9,30 @@ import { Category } from './Category'
 import { Products } from './Products'
 import { ReiviewCart } from './ReiviewCart'
 import { useConfig } from '../../contexts/ConfigContext';
-
+import { SearchInput } from '../Shared/SearchInput'
+import { FixedHeader, GobackTitle } from '../Layout/FixedHeader'
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import {
   HomeContainer,
   DeiveryWrapper,
   AllProducts,
   BetweenGray,
-  WhatsappContainer
+  WhatsappContainer,
+  ProductSearchWrapper,
+  OneEle
 } from './styles'
 
-export const Home = () => {
+export const Home = (props) => {
 
+  const { isProductSearched, searchProducts } = props
   const { width } = useWindowSize();
   const [categories] = useCategory();
   const [configState] = useConfig()
   const [catId, setCatId] = useState(null);
+  const currentLng = localStorage.getItem('i18nextLng');
+  const { t } = useTranslation();
   const [scrolledCatId, setscrolledCatId] = useState(1);
-
+  const [searchedText, setSearchedText] = useState('');
   const handleChangeCat = (catId) => {
     setCatId(catId);
     if (catId === null) {
@@ -32,6 +40,11 @@ export const Home = () => {
       return
     }
     document.getElementById('rightContainer').classList.add("spec-category");
+  }
+
+  const searchChange = (e) => {
+    const searchText = e.target.value;
+    setSearchedText(searchText)
   }
 
   useEffect(() => {
@@ -57,20 +70,45 @@ export const Home = () => {
 
   return (
     <HomeContainer id="homeContainer">
-      <Header setCatId={setCatId} />
-      <DeiveryWrapper>
-        <Delivery />
-      </DeiveryWrapper>
-      <BetweenGray />
-      {!catId && (
+      {!isProductSearched && (
+        <>
+          <Header setCatId={setCatId} />
+          <DeiveryWrapper>
+            <Delivery />
+          </DeiveryWrapper>
+          <BetweenGray />
+        </>
+      )}
+      {isProductSearched && (
+        <ProductSearchWrapper>
+          <FixedHeader>
+            {currentLng === 'en'
+              ? <FiArrowLeft size="20" onClick={() => searchProducts(false)} />
+              : <FiArrowRight size="20" onClick={() => searchProducts(false)} />
+            }
+            <GobackTitle>{t('Product Search')}</GobackTitle>
+          </FixedHeader>
+          <OneEle>
+            <SearchInput onChange={(e) => searchChange(e)} />
+          </OneEle>
+        </ProductSearchWrapper>
+      )}
+      {!(catId || (searchedText !== '' && isProductSearched)) && (
         <Category handleChangeCat={handleChangeCat} catId={catId} scrolledCatId={scrolledCatId} />
       )}
-      {catId && (
-        <AllProducts>
-          <Products catId={catId} handleChangeCat={handleChangeCat} />
+      {(catId || (searchedText !== '' && isProductSearched)) && (
+        <AllProducts isNotProductSearched={!isProductSearched}>
+          <Products
+            catId={catId}
+            searchedText={searchedText}
+            handleChangeCat={handleChangeCat}
+            isProductSearched={isProductSearched}
+          />
         </AllProducts>
       )}
-      <ReiviewCart />
+      {!(catId || (searchedText !== '' && isProductSearched)) && (
+        <ReiviewCart />
+      )}
       <WhatsappContainer href={configState?.configs?.whatsAppUrl} target="_blank" rel="noreferrer">
         <AiOutlineWhatsApp color="white" size="30" />
       </WhatsappContainer>

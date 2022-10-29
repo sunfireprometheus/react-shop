@@ -30,6 +30,7 @@ export const App = () => {
   const onlineStatus = useOnlineStatus()
   const [, i18n] = useTranslation()
   const [orderDetail, { updateOrder }] = useOrder();
+  const [isProductSearched, setIsProductSearched] = useState()
   const currentHour = moment().tz("Asia/Kuwait").hour();
   const [cart] = useCart();
   const location = useLocation();
@@ -40,6 +41,10 @@ export const App = () => {
   const convertAmPm = (hour) => {
     return hour <= 11 ? hour + 'am' :
       hour === 12 ? hour + 'pm' : (hour - 12) + 'pm'
+  }
+
+  const searchProducts = (status) => {
+    setIsProductSearched(status)
   }
 
   const updateDeliveryTime = (orderDetail) => {
@@ -75,7 +80,7 @@ export const App = () => {
           {onlineStatus && (
             <Switch>
               <Route exact path='/home'><Redirect to='/' /></Route>
-              <Route exact path='/'><Home /></Route>
+              <Route exact path='/'><Home isProductSearched={isProductSearched} searchProducts={searchProducts} /></Route>
               <Route exact path='/order'>
                 {
                   orderDetail.currentLocation
@@ -127,7 +132,10 @@ export const App = () => {
           )}
 
           {(location.pathname === '/' || location.pathname === '/home' || width > 990) &&
-            <RightMain />
+            <RightMain
+              searchIconShowed={location.pathname === '/' || location.pathname === '/home'}
+              searchProducts={searchProducts}
+              isProductSearched={isProductSearched} />
           }
         </AppWrap>
       }
