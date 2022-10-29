@@ -44,7 +44,7 @@ export const OrderDetail = (props) => {
           </DetailRow>
           <DetailRow>
             <DetailTitle>
-              {t('orderReferenceNumber')}:
+              {t('Reverence ID')}:
             </DetailTitle>
             <DetailVal>
               {paymentStatus?.orderReferenceNumber}

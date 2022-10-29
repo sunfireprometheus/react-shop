@@ -37,7 +37,9 @@ export const DeliveryDetail = () => {
           {t('Delivery Time')}:
         </DetailTitle>
         <DetailVal>
-          {orderDetail.deiveryTime.date + ' - ' + t(orderDetail.deiveryTime.time)}
+          <span>{orderDetail?.deiveryTime?.date}</span>
+          <span> - </span>
+          <span dir="ltr">{t(orderDetail?.deiveryTime?.time)}</span>
         </DetailVal>
       </DetailRow>
 

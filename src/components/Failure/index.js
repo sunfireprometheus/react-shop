@@ -1,8 +1,7 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-
+import ApiHooks from '../../hooks/ApiHooks'
 import { CheckoutProgress } from '../CheckoutProgress';
 import { useCart } from '../../contexts/CartContext';
 import { useOrder } from '../../contexts/OrderContext';
@@ -17,11 +16,16 @@ import {
 export const Failure = () => {
 
   const currentLng = localStorage.getItem('i18nextLng');
-  const { t } = useTranslation();
+  const payment_response = 'payment_response'
   const location = useLocation();
+  const { search } = useLocation();
   const history = useHistory();
   const [, { initCart }] = useCart();
   const [, { initOrder }] = useOrder();
+
+  const _param = search.split('=')[1] || ''
+
+  const [paymentStatus] = ApiHooks(`/${payment_response}/${_param}`, {}, 'GET', _param !== 'cashpay')
 
   const goHome = () => {
     initCart();
@@ -30,18 +34,22 @@ export const Failure = () => {
   }
 
   return (
-    <ConfirmContainer>
-      <FixedHeader>
-        {currentLng === 'en'
-          ? <FiArrowLeft size="20" onClick={goHome} />
-          : <FiArrowRight size="20" onClick={goHome} />
-        }
-        <GobackTitle><span>{t('Order')}</span><span>12345</span></GobackTitle>
-      </FixedHeader>
-      <CheckoutProgress step={4} />
-      <MainContent>
-        <ResultMessage res={location.state} />
-      </MainContent>
-    </ConfirmContainer>
+    <>
+      {(!paymentStatus.loading && paymentStatus.result) ? (
+        <ConfirmContainer>
+          <FixedHeader>
+            {currentLng === 'en'
+              ? <FiArrowLeft size="20" onClick={goHome} />
+              : <FiArrowRight size="20" onClick={goHome} />
+            }
+            <GobackTitle dir="ltr"><span>#{paymentStatus.result?.data?.response?.data?.variable1}</span></GobackTitle>
+          </FixedHeader>
+          <CheckoutProgress step={4} />
+          <MainContent>
+            <ResultMessage res={false} />
+          </MainContent>
+        </ConfirmContainer>
+      ) : (<ConfirmContainer />)}
+    </>
   )
 }

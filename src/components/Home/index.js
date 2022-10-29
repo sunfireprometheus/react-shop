@@ -110,9 +110,7 @@ export const Home = (props) => {
           />
         </AllProducts>
       )}
-      {!(catId || (searchedText !== '' && isProductSearched)) && (
-        <ReiviewCart />
-      )}
+      <ReiviewCart />
       <WhatsappContainer href={configState?.configs?.whatsAppUrl} target="_blank" rel="noreferrer">
         <AiOutlineWhatsApp color="white" size="30" />
       </WhatsappContainer>
