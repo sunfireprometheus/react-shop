@@ -12,6 +12,7 @@ import { useConfig } from '../../contexts/ConfigContext';
 import { SearchInput } from '../Shared/SearchInput'
 import { FixedHeader, GobackTitle } from '../Layout/FixedHeader'
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { BsSearch } from "react-icons/bs";
 import {
   HomeContainer,
   DeiveryWrapper,
@@ -19,7 +20,8 @@ import {
   BetweenGray,
   WhatsappContainer,
   ProductSearchWrapper,
-  OneEle
+  OneEle,
+  SearchedArea
 } from './styles'
 
 export const Home = (props) => {
@@ -95,9 +97,15 @@ export const Home = (props) => {
           <OneEle>
             <SearchInput onChange={(e) => searchChange(e)} />
           </OneEle>
+          {searchedText === '' && (
+            <SearchedArea>
+              <BsSearch size={100} />
+            </SearchedArea>
+          )}
+
         </ProductSearchWrapper>
       )}
-      {!(catId || (searchedText !== '' && isProductSearched)) && (
+      {!isProductSearched && (
         <Category handleChangeCat={handleChangeCat} catId={catId} scrolledCatId={scrolledCatId} />
       )}
       {(catId || (searchedText !== '' && isProductSearched)) && (

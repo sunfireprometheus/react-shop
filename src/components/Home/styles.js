@@ -58,6 +58,14 @@ export const OneEle = styled.div`
     border-bottom: 1px solid #e8e8e8;
     background-color: ${({ theme }) => theme.colors.backgroundColor};
 `
+export const SearchedArea = styled.div`
+    width: 100%;
+    height: calc(100vh - 182px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
 export const HomeContainer = (props) => {
   return (
     <HomeContainerStyled id={props.id}>
