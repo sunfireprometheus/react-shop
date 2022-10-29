@@ -65,7 +65,11 @@ export const SearchedArea = styled.div`
     justify-content: center;
     align-items: center;
 `
-
+export const SearchBackground = styled.div`
+  background-color: ${({ theme }) => theme.colors.backgroundColor};
+  border-radius: 50%;
+  padding: 25px;
+`
 export const HomeContainer = (props) => {
   return (
     <HomeContainerStyled id={props.id}>

@@ -12,6 +12,7 @@ export const SearchContainerStyled = styled.div`
         width: 100%;
         outline-width: 0;
         font-size: 16px;
+        font-family: 'Cairo',sans-serif;
     }
 `
 

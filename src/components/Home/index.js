@@ -21,7 +21,8 @@ import {
   WhatsappContainer,
   ProductSearchWrapper,
   OneEle,
-  SearchedArea
+  SearchedArea,
+  SearchBackground
 } from './styles'
 
 export const Home = (props) => {
@@ -99,7 +100,9 @@ export const Home = (props) => {
           </OneEle>
           {searchedText === '' && (
             <SearchedArea>
-              <BsSearch size={100} />
+              <SearchBackground>
+                <BsSearch size={50} />
+              </SearchBackground>
             </SearchedArea>
           )}
 
