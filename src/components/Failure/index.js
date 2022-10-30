@@ -12,6 +12,7 @@ import {
   ConfirmContainer,
   MainContent
 } from './styles';
+import { t } from 'i18next';
 
 export const Failure = () => {
 
@@ -25,7 +26,7 @@ export const Failure = () => {
 
   const _param = search.split('=')[1] || ''
 
-  const [paymentStatus] = ApiHooks(`/${payment_response}/${_param}`, {}, 'GET', _param !== 'cashpay')
+  const [paymentStatus] = ApiHooks(`/${payment_response}/${_param}`, {}, 'GET', _param !== 'cashpay' && _param !== '')
 
   const goHome = () => {
     initCart();
@@ -35,14 +36,21 @@ export const Failure = () => {
 
   return (
     <>
-      {(!paymentStatus.loading && paymentStatus.result) ? (
+      {(!paymentStatus.loading) ? (
         <ConfirmContainer>
           <FixedHeader>
             {currentLng === 'en'
               ? <FiArrowLeft size="20" onClick={goHome} />
               : <FiArrowRight size="20" onClick={goHome} />
             }
-            <GobackTitle dir="ltr"><span>#{paymentStatus.result?.data?.response?.data?.variable1}</span></GobackTitle>
+            <GobackTitle dir="ltr">
+              {paymentStatus.result?.data?.response?.data?.variable1 ? (
+                <span>#{paymentStatus.result?.data?.response?.data?.variable1}</span>
+              ) : (
+                <span>{t('Invalid Order')}</span>
+              )}
+
+            </GobackTitle>
           </FixedHeader>
           <CheckoutProgress step={4} />
           <MainContent>

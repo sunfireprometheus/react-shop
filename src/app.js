@@ -71,6 +71,7 @@ export const App = () => {
     const currentDir = localStorage.getItem('i18nextLng') === 'ar' ? true : false;
     currentDir !== theme.rtl && update({ ...theme, rtl: !theme.rtl });
   }, [i18n])
+
   return (
     <>
       {!loaded && <Loading />}
@@ -114,17 +115,13 @@ export const App = () => {
 
               <Route exact path='/confirm'>
                 {
-                  orderDetail.currentLocation && orderDetail.contact && orderDetail.address && cart.length > 0
-                    ? <Confirm />
-                    : <Redirect to='/home' />
+                  <Confirm />
                 }
               </Route>
 
               <Route exact path='/failure'>
                 {
-                  orderDetail.currentLocation && orderDetail.contact && orderDetail.address && cart.length > 0
-                    ? <Failure />
-                    : <Redirect to='/home' />
+                  <Failure />
                 }
               </Route>
 

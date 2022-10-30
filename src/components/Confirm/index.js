@@ -33,7 +33,7 @@ export const Confirm = () => {
   const [, { initCart }] = useCart();
   const [orderDetail, { initOrder }] = useOrder();
   const paymentStatusInCash = orderDetail?.orderInfo
-  const [paymentStatus] = ApiHooks(`/${payment_response}/${_param}`, {}, 'GET', _param !== 'cashpay')
+  const [paymentStatus] = ApiHooks(`/${payment_response}/${_param}`, {}, 'GET', (_param !== 'cashpay' && _param !== ''))
 
   const goHome = () => {
     initCart();
@@ -46,9 +46,11 @@ export const Confirm = () => {
       setResult(paymentStatusInCash)
       return
     }
+
     setResult(paymentStatus?.result?.data?.response?.data)
   }, [paymentStatus, paymentStatusInCash])
 
+  console.log(paymentStatus, 'paymentStatus')
   return (
     <>
       {result ? (

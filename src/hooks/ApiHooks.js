@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import setting from '../setting.json'
 
 const ApiHooks = (endpoint, req, method, call) => {
-  const [data, setData] = useState({ result: null, error: false, loading: false });
+  const [data, setData] = useState({ result: {}, error: false, loading: false });
 
   useEffect(() => {
     const getFetch = async () => {
@@ -21,7 +21,7 @@ const ApiHooks = (endpoint, req, method, call) => {
         setData({ result: result, error: false, loading: false })
       } catch (err) {
         console.log(err, 'error')
-        setData({ result: null, error: true, loading: false })
+        setData({ result: err, error: true, loading: false })
       }
 
     }
